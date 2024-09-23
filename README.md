@@ -1,50 +1,16 @@
-# React + TypeScript + Vite
+# MPC Framework Browser Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a demonstration of [MPC Framework](https://www.npmjs.com/package/mpc-framework) with the [`MpzSemiHonestBackend`](https://www.npmjs.com/package/mpz-ts) running in the browser.
 
-Currently, two official plugins are available:
+It's a very not-flashy demo that simply outputs a few things to the console.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```sh
+npm install
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Server Headers
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+If you want to deploy something like this, I suggest taking a look at [cross-origin isolation](https://web.dev/articles/cross-origin-isolation-guide). This is required for the use of `SharedArrayBuffer`, which is used to do multithreading for the underlying [mpz](https://github.com/privacy-scaling-explorations/mpz) library.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+In this demo, the required headers are set in [`vite.config.ts`](./vite.config.ts).
